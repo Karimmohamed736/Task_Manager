@@ -14,21 +14,18 @@ A simple, clean Task Manager built with Laravel and Bootstrap 4, allowing users 
 
 ## Overview / Approach
 
-- Built using Laravel's standard MVC structure with an added **Service Layer** (`App\Services\TaskService`) to keep business logic out of the Controller, making the code easier to maintain, extend, and test.
-- Validation is handled through dedicated **Form Request** classes (`StoreTaskRequest`, `UpdateTaskRequest`) rather than inline validation in the Controller, keeping validation rules reusable and self-contained.
-- The task status (`pending` / `completed`) is stored as an `enum` column at the database level for data integrity, so invalid statuses can never reach the database regardless of the entry point (form, API, tinker, etc.).
-- Frontend is built with **Bootstrap 4** (via CDN, no build step or npm install required) and Blade templates, keeping the setup lightweight and fast to run locally.
-- A quick "Mark as Completed / Pending" toggle button is available directly from the task list for fast status updates, in addition to full editing via the Edit form.
-- Route Model Binding is used throughout (`Task $task` in controller methods) instead of manually querying by ID, keeping controller code short and expressive.
-- Old input (`old()`) is preserved on validation failure for both the Create and Edit forms, so users never lose what they typed.
+- Built using Laravel's standard MVC structure with an added **Service Layer** (`App\Services\TaskService`) to keep business logic out of the Controller.
+- Validation is handled through dedicated **Form Request** classes (`StoreTaskRequest`, `UpdateTaskRequest`) instead of inline validation.
+- Task status (`pending` / `completed`) is stored as an `enum` at the database level for data integrity.
+- Frontend built with **Bootstrap 4** (via CDN, no build step required) and Blade templates.
+- A quick "Mark as Completed / Pending" toggle is available from the task list, in addition to full editing.
 
 ## Assumptions
 
-- No authentication/user system was required by the task description, so all tasks are global (not tied to a specific user or account).
-- The `show` route (viewing a single task in detail) is available automatically via Laravel's resource routing but not actively used in the UI, since the task list already displays all relevant task info (title, description preview, date, status).
-- Task descriptions are optional, as specified in the requirements; empty descriptions are displayed as "—" in the task list for clarity.
-- Search matches against both the task title and status, since the requirements mention filtering by either.
-- Pagination is set to 10 tasks per page as a reasonable default; this can be adjusted in `TaskService::getAllTasks()`.
+- No authentication system was required, so tasks are global (not tied to a specific user).
+- The `show` route exists via Laravel's resource routing but isn't used in the UI, since the task list already shows all relevant info.
+- Search matches both title and status.
+- Pagination is set to 10 tasks per page.
 
 ## Setup Instructions
 
@@ -138,7 +135,7 @@ routes/
 ```
 ## Tech Stack
 
-- **Backend:** Laravel (latest), PHP 8.1+
+- **Backend:** Laravel (13), PHP 8.1+
 - **Frontend:** Bootstrap 4 (CDN), jQuery, Popper.js
 - **Database:** MySQL
 - **Templating:** Blade
