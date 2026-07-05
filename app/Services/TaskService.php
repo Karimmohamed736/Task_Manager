@@ -16,7 +16,7 @@ Class TaskService
 
     public function create(array $data)
     {
-        return view('tasks.create');
+        return view('Tasks.create');
     }
 
     public function store(StoreTaskRequest $request)
@@ -27,7 +27,7 @@ Class TaskService
 
     public function edit(Task $task)
     {
-        return view('tasks.edit', compact('task'));
+        return view('Tasks.edit', compact('task'));
     }
 
     public function update(Task $task, UpdateTaskRequest $request)
@@ -48,4 +48,5 @@ Class TaskService
         $task->save();
         return redirect()->route('tasks.index')->with('success', 'Task status updated successfully.');
     }
+
 }

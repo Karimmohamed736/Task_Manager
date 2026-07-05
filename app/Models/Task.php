@@ -10,7 +10,7 @@ class Task extends Model
 
     public function scopeSearch($query, ?string $term)
     {
-        if ($term) {
+        if (!$term) {
             return $query;
         }
 

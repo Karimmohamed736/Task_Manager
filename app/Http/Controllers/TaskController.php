@@ -13,7 +13,7 @@ class TaskController extends Controller
     public function index()
     {
         $tasks = (new TaskService())->getAllTasks(request());
-        return view('tasks.index', compact('tasks'));
+        return view('Tasks.index', compact('tasks'));
     }
 
     public function create()
